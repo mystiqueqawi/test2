@@ -101,3 +101,31 @@ button:hover {
     font-size: 1.1em;
     color: green;
 }
+ /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .billing-details, .order-summary {
+                padding: 15px;
+            }
+            
+            .order-total {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .order-total span {
+                margin-bottom: 5px;
+            }
+            
+            h2, h3 {
+                font-size: 1.2em;
+            }
+            
+            button[type="submit"] {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
