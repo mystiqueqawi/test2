@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - A Pen by mystiqueqawi</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,20 +10,20 @@
     <div class="container">
         <div class="billing-details">
             <h2>Billing Details</h2>
-            <form>
+            <form id="orderForm">
                 <label for="name">Your Name *</label>
-                <input type="text" id="name" placeholder="Enter your name">
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 
                 <label for="address">Your Address *</label>
-                <input type="text" id="address" placeholder="House no., Road no., Area, City">
+                <input type="text" id="address" name="address" placeholder="House no., Road no., Area, City" required>
                 
                 <label for="phone">Your Phone *</label>
-                <input type="text" id="phone" placeholder="Enter your phone number">
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
                 
                 <h3>Select a Package</h3>
                 
                 <div class="package">
-                    <input type="radio" id="basic" name="package" value="basic">
+                    <input type="radio" id="basic" name="package" value="600" required>
                     <label for="basic">
                         <span>Basic Course - 200ml Oil</span><br>
                         <span>Price: 600.00 BDT</span>
@@ -41,7 +31,7 @@
                 </div>
                 
                 <div class="package">
-                    <input type="radio" id="half" name="package" value="half" checked>
+                    <input type="radio" id="half" name="package" value="1000" checked required>
                     <label for="half">
                         <span>Half Course - 400ml Oil</span><br>
                         <span class="discounted">Price: 1,000.00 BDT (was 1,200.00 BDT)</span>
@@ -49,50 +39,89 @@
                 </div>
                 
                 <div class="package">
-                    <input type="radio" id="full" name="package" value="full">
+                    <input type="radio" id="full" name="package" value="1500" required>
                     <label for="full">
                         <span>Full Course - 800ml Oil + 250ml Hair Serum</span><br>
                         <span class="discounted">Price: 1,500.00 BDT (was 1,800.00 BDT)</span>
                     </label>
                 </div>
+
+                <h3>Shipping</h3>
+                <div class="shipping">
+                    <input type="radio" id="inside" name="shipping" value="80" checked required>
+                    <label for="inside">Inside Dhaka: 80.00 BDT</label><br>
+                    
+                    <input type="radio" id="outside" name="shipping" value="140" required>
+                    <label for="outside">Outside Dhaka: 140.00 BDT</label><br>
+                    
+                    <input type="radio" id="free" name="shipping" value="0" required>
+                    <label for="free">Free Shipping</label>
+                </div>
+                
+                <button type="submit">Place Order</button>
             </form>
         </div>
         
         <div class="order-summary">
             <h2>Your Order</h2>
             <div class="order-item">
-                <span>Hair Oil Half Course</span>
-                <span>1,000.00 BDT</span>
+                <span id="orderPackage">Hair Oil Half Course</span>
+                <span id="orderPackagePrice">1,000.00 BDT</span>
             </div>
             <div class="order-total">
                 <span>Subtotal:</span>
-                <span>1,000.00 BDT</span>
+                <span id="subtotal">1,000.00 BDT</span>
             </div>
-            <div class="shipping">
-                <h3>Shipping</h3>
-                <input type="radio" id="inside" name="shipping" value="inside" checked>
-                <label for="inside">Inside Dhaka: 80.00 BDT</label><br>
-                
-                <input type="radio" id="outside" name="shipping" value="outside">
-                <label for="outside">Outside Dhaka: 140.00 BDT</label><br>
-                
-                <input type="radio" id="free" name="shipping" value="free">
-                <label for="free">Free Shipping</label>
+            <div class="order-total">
+                <span>Shipping:</span>
+                <span id="shippingCost">80.00 BDT</span>
             </div>
             <div class="order-total">
                 <span>Total:</span>
-                <span>1,080.00 BDT</span>
+                <span id="totalCost">1,080.00 BDT</span>
             </div>
-            <button type="submit">Place Order - 1,080.00 BDT</button>
         </div>
     </div>
     
     <div class="footer">
         <p>For any queries, call us at: 09613-651212</p>
     </div>
-</body>
-</html>
-<!-- partial -->
-  
+
+    <script>
+        const packageRadios = document.querySelectorAll('input[name="package"]');
+        const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+
+        const orderPackage = document.getElementById('orderPackage');
+        const orderPackagePrice = document.getElementById('orderPackagePrice');
+        const subtotal = document.getElementById('subtotal');
+        const shippingCost = document.getElementById('shippingCost');
+        const totalCost = document.getElementById('totalCost');
+
+        function updateOrderSummary() {
+            const selectedPackage = document.querySelector('input[name="package"]:checked');
+            const selectedShipping = document.querySelector('input[name="shipping"]:checked');
+
+            const packageName = selectedPackage.nextElementSibling.querySelector('span:first-child').innerText;
+            const packagePrice = parseInt(selectedPackage.value);
+            const shippingPrice = parseInt(selectedShipping.value);
+            
+            orderPackage.innerText = packageName;
+            orderPackagePrice.innerText = `${packagePrice}.00 BDT`;
+            subtotal.innerText = `${packagePrice}.00 BDT`;
+            shippingCost.innerText = `${shippingPrice}.00 BDT`;
+            totalCost.innerText = `${packagePrice + shippingPrice}.00 BDT`;
+        }
+
+        packageRadios.forEach(radio => {
+            radio.addEventListener('change', updateOrderSummary);
+        });
+
+        shippingRadios.forEach(radio => {
+            radio.addEventListener('change', updateOrderSummary);
+        });
+
+        // Initialize the order summary on page load
+        updateOrderSummary();
+    </script>
 </body>
 </html>
