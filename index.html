@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by mystiqueqawi</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="billing-details">
+            <h2>Billing Details</h2>
+            <form>
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" placeholder="Enter your name">
+                
+                <label for="address">Your Address *</label>
+                <input type="text" id="address" placeholder="House no., Road no., Area, City">
+                
+                <label for="phone">Your Phone *</label>
+                <input type="text" id="phone" placeholder="Enter your phone number">
+                
+                <h3>Select a Package</h3>
+                
+                <div class="package">
+                    <input type="radio" id="basic" name="package" value="basic">
+                    <label for="basic">
+                        <span>Basic Course - 200ml Oil</span><br>
+                        <span>Price: 600.00 BDT</span>
+                    </label>
+                </div>
+                
+                <div class="package">
+                    <input type="radio" id="half" name="package" value="half" checked>
+                    <label for="half">
+                        <span>Half Course - 400ml Oil</span><br>
+                        <span class="discounted">Price: 1,000.00 BDT (was 1,200.00 BDT)</span>
+                    </label>
+                </div>
+                
+                <div class="package">
+                    <input type="radio" id="full" name="package" value="full">
+                    <label for="full">
+                        <span>Full Course - 800ml Oil + 250ml Hair Serum</span><br>
+                        <span class="discounted">Price: 1,500.00 BDT (was 1,800.00 BDT)</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        
+        <div class="order-summary">
+            <h2>Your Order</h2>
+            <div class="order-item">
+                <span>Hair Oil Half Course</span>
+                <span>1,000.00 BDT</span>
+            </div>
+            <div class="order-total">
+                <span>Subtotal:</span>
+                <span>1,000.00 BDT</span>
+            </div>
+            <div class="shipping">
+                <h3>Shipping</h3>
+                <input type="radio" id="inside" name="shipping" value="inside" checked>
+                <label for="inside">Inside Dhaka: 80.00 BDT</label><br>
+                
+                <input type="radio" id="outside" name="shipping" value="outside">
+                <label for="outside">Outside Dhaka: 140.00 BDT</label><br>
+                
+                <input type="radio" id="free" name="shipping" value="free">
+                <label for="free">Free Shipping</label>
+            </div>
+            <div class="order-total">
+                <span>Total:</span>
+                <span>1,080.00 BDT</span>
+            </div>
+            <button type="submit">Place Order - 1,080.00 BDT</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>For any queries, call us at: 09613-651212</p>
+    </div>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
